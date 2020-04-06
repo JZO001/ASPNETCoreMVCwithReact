@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using ASPNETCoreMVCwithReact.Codes;
 using Forge.Logging;
+using Forge.Net.WebSockets;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,6 +26,14 @@ namespace ASPNETCoreMVCwithReact
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            // In production, the React files will be served from this directory
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "ClientApp/build";
+            });
+
+            services.AddWebSocketManager();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,7 +60,14 @@ namespace ASPNETCoreMVCwithReact
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
-            app.UseStaticFiles("/wwwroot");
+
+            var serviceScopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
+            var serviceProvider = serviceScopeFactory.CreateScope().ServiceProvider;
+            app.UseWebSockets();
+            app.UseWebSocketManager("/browserrefresh", serviceProvider.GetService<BrowserRefresh>());
+
+            app.UseStaticFiles();
+            app.UseSpaStaticFiles();
 
             app.UseRouting();
 
@@ -63,6 +75,8 @@ namespace ASPNETCoreMVCwithReact
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllers();
+
                 // default map (landing page)
                 endpoints.MapControllerRoute(
                     name: "default",
@@ -81,6 +95,17 @@ namespace ASPNETCoreMVCwithReact
                     defaults: new { controller = "Article", action = "Index" });
 
             });
+
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "Clientapp";
+
+                //if (env.IsDevelopment())
+                //{
+                //    spa.UseReactDevelopmentServer(npmScript: "start");
+                //}
+            });
+
         }
     }
 }

@@ -3,9 +3,13 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="Sesame Documentation" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <base href="%PUBLIC_URL%/" />
 
-    <base href="/" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
 
     @Html.Raw(ViewBag.HeadContent)
 </head>
@@ -20,5 +24,36 @@
     @RenderBody()
 
     @RenderSection("Scripts", required: false)
+
+    @{ 
+#if DEBUG
+    }
+    <script type="text/javascript" language="javascript">
+        var brUri = (location.protocol == "https:" ? "wss:" : "ws:") + "//" + window.location.host + "/browserrefresh";
+        var brWS = null;
+        function connect() {
+            brWS = new WebSocket(brUri);
+            brWS.onopen = function (event) {
+                console.log("BrowserRefresh, opened connection to " + brUri);
+            };
+            brWS.onclose = function (event) {
+                console.log("BrowserRefresh, closed connection from " + brUri);
+            };
+            brWS.onmessage = function (event) {
+                if (event.data === "REFRESH") {
+                    console.log("BrowserRefresh, reload");
+                    location.reload();
+                }
+            };
+            brWS.onerror = function (event) {
+                console.log("BrowserRefresh, error: " + event.data);
+            };
+        }
+        connect();
+    </script>
+    @{
+#endif
+    }
+
 </body>
 </html>

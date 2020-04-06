@@ -3,7 +3,7 @@ How to integrate ReactJS into ASP.NET Core MVC project with the ability to serve
 
 For detailed documentation, please visit: https://jzo.hu/blog/1002
 
-To start the project, run "npm run build" or "npm run build:prod", than in Visual Studio just simply run the project with IIS Express.
+To start the project for development, run "npm run start" in command prompt (don't forget to navigate to the ClientApp folder). For production optimized compilation, run "npm run build". Finally, in Visual Studio just simply run the project with IIS Express.
 
 In the browser, you see the difference in the HTML HEAD, if you open three browser tab with these links:
 
