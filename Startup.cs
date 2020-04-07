@@ -61,10 +61,13 @@ namespace ASPNETCoreMVCwithReact
             }
             app.UseHttpsRedirection();
 
+#if DEBUG
+            // depends on what you need, you can use the WebSocket feature. In that case, mode the DEBUG check preprocessor after 'app.UseWebSocket();'
             var serviceScopeFactory = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>();
             var serviceProvider = serviceScopeFactory.CreateScope().ServiceProvider;
             app.UseWebSockets();
             app.UseWebSocketManager("/browserrefresh", serviceProvider.GetService<BrowserRefresh>());
+#endif
 
             app.UseStaticFiles();
             app.UseSpaStaticFiles();

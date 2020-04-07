@@ -1,4 +1,6 @@
-﻿using Forge.Net.WebSockets;
+﻿#if DEBUG
+
+using Forge.Net.WebSockets;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
@@ -35,3 +37,5 @@ namespace ASPNETCoreMVCwithReact.Codes
     }
 
 }
+
+#endif
