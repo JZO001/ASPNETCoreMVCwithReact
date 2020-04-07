@@ -33,7 +33,10 @@ namespace ASPNETCoreMVCwithReact
                 configuration.RootPath = "ClientApp/build";
             });
 
+#if DEBUG
+            // depends on what you need, you can use the WebSocket feature. If you use, just remove the preprocessor.
             services.AddWebSocketManager();
+#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
