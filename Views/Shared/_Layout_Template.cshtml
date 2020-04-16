@@ -29,7 +29,7 @@
 #if DEBUG
     }
     <script type="text/javascript" language="javascript">
-        var brUri = (location.protocol == "https:" ? "wss:" : "ws:") + "//" + window.location.host + "/browserrefresh";
+        var brUri = (window.location.protocol === "https:" ? "wss:" : "ws:") + "//" + window.location.host + "/browserrefresh";
         var brWS = null;
         function connect() {
             brWS = new WebSocket(brUri);
