@@ -38,6 +38,9 @@
             };
             brWS.onclose = function (event) {
                 console.log("BrowserRefresh, closed connection from " + brUri);
+                setTimeout(() => {
+                    connect();
+                }, 1000);
             };
             brWS.onmessage = function (event) {
                 if (event.data === "REFRESH") {
