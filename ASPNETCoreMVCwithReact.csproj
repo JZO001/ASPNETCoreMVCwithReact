@@ -32,10 +32,10 @@
   <ItemGroup>
     <PackageReference Include="Forge.Base" Version="1.0.25" />
     <PackageReference Include="Forge.Logging.Log4Net" Version="1.0.1" />
-    <PackageReference Include="Forge.Net.WebSockets" Version="1.0.1" />
+    <PackageReference Include="Forge.Net.WebSockets" Version="1.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.3" />
     <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="3.1.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
   </ItemGroup>
 
