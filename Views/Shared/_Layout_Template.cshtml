@@ -45,7 +45,7 @@
             brWS.onmessage = function (event) {
                 if (event.data === "REFRESH") {
                     console.log("BrowserRefresh, reload");
-                    location.reload();
+                    window.location.reload();
                 }
             };
             brWS.onerror = function (event) {
