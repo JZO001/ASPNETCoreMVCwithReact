@@ -104,7 +104,14 @@ namespace ASPNETCoreMVCwithReact
 
             app.UseSpa(spa =>
             {
-                spa.Options.SourcePath = "Clientapp";
+                if (env.IsDevelopment())
+                {
+                    spa.Options.SourcePath = "ClientApp";
+                }
+                else
+                {
+                    spa.Options.SourcePath = "ClientApp/build";
+                }
 
                 //if (env.IsDevelopment())
                 //{
