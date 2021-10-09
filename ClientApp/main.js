@@ -50,7 +50,7 @@ if (['build', 'eject', 'start', 'test'].includes(script)) {
     console.log("Exitcode: " + result.status);
     process.exit(result.status);
 } else {
-    console.log('Unknown script "' + script + '".');
+    console.log('Unknown script ' + script + '.');
     console.log('Use one of these: build, eject, start or test');
     console.log(
         'See: https://facebook.github.io/create-react-app/docs/updating-to-new-releases'
